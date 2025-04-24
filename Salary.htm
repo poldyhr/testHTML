@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Salary Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Net Salary Calculator</h2>
+        <form id="salaryForm">
+            <label for="grossSalary">Gross Salary:</label>
+            <input type="text" id="grossSalary" name="grossSalary" required>
+            
+            <label for="taxPercentage">Tax Percentage (%):</label>
+            <input type="text" id="taxPercentage" name="taxPercentage" required>
+            
+            <label for="otherDeductions">Other Deductions:</label>
+            <input type="text" id="otherDeductions" name="otherDeductions" required>
+            
+            <button type="button" onclick="calculateNetSalary()">Calculate Net Salary</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateNetSalary() {
+            const grossSalary = parseFloat(document.getElementById('grossSalary').value);
+            const taxPercentage = parseFloat(document.getElementById('taxPercentage').value);
+            const otherDeductions = parseFloat(document.getElementById('otherDeductions').value);
+
+            if (isNaN(grossSalary) || isNaN(taxPercentage) || isNaN(otherDeductions)) {
+                document.getElementById('result').innerText = 'Please enter valid numbers.';
+                return;
+            }
+
+            const taxAmount = (taxPercentage / 100) * grossSalary;
+            const netSalary = grossSalary - taxAmount - otherDeductions;
+
+            document.getElementById('result').innerText = 'Net Salary: $' + netSalary.toFixed(2);
+        }
+    </script>
+</body>
+</html>
